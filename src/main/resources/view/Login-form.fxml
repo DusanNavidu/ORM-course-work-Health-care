@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.controller.LoginController">
+<AnchorPane fx:id="pageLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.controller.LoginController">
    <children>
       <ImageView fitHeight="950.0" fitWidth="650.0" layoutX="84.0" layoutY="-142.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
          <image>
@@ -47,7 +47,7 @@
                               <Insets top="7.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField prefHeight="50.0" prefWidth="400.0" promptText="user name" style="-fx-background-color: white; -fx-border-color: #9AA6B2; -fx-border-width: 2; -fx-border-radius: 5;">
+                        <TextField fx:id="txtUsername" prefHeight="50.0" prefWidth="400.0" promptText="user name" style="-fx-background-color: white; -fx-border-color: #9AA6B2; -fx-border-width: 2; -fx-border-radius: 5;">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -64,12 +64,12 @@
                               <Insets top="7.0" />
                            </HBox.margin>
                         </ImageView>
-                        <TextField prefHeight="50.0" prefWidth="400.0" promptText="password" style="-fx-background-color: white; -fx-border-color: #9AA6B2; -fx-border-width: 2; -fx-border-radius: 5;">
+                        <TextField fx:id="txtPassword" prefHeight="50.0" prefWidth="400.0" promptText="password" style="-fx-background-color: white; -fx-border-color: #9AA6B2; -fx-border-width: 2; -fx-border-radius: 5;">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <ImageView>
+                        <ImageView fx:id="btnViewPW" onMouseClicked="#btnViewPWOnAction">
                            <image>
                               <Image url="@../assests/image/icons/hidden(1).png" />
                            </image>
@@ -81,7 +81,7 @@
                   </HBox>
                </children>
             </VBox>
-            <JFXButton buttonType="RAISED" layoutX="176.0" layoutY="491.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #51489f; -fx-border-radius: 8; -fx-background-radius: 8;" text="Sign up" textFill="WHITE">
+            <JFXButton fx:id="btnSignin" buttonType="RAISED" layoutX="176.0" layoutY="491.0" onAction="#btnSigninOnAction" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #51489f; -fx-border-radius: 8; -fx-background-radius: 8;" text="Sign in" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -91,12 +91,12 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="373.0" layoutY="542.0" text="Sign Up" textFill="#2200ff" underline="true">
+            <Label fx:id="btnSignUp" layoutX="373.0" layoutY="542.0" onMouseClicked="#btnSignUpOnAction" text="Sign Up" textFill="#2200ff" underline="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="380.0" layoutY="442.0" text="Forget your password?" textFill="#2200ff" underline="true">
+            <Label fx:id="btnFPW" layoutX="380.0" layoutY="442.0" onMouseClicked="#btnFPWOnAction" text="Forget your password?" textFill="#2200ff" underline="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

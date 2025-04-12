@@ -10,24 +10,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pageSignUp" prefHeight="800.0" prefWidth="640.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.controller.RegisterController">
+<AnchorPane fx:id="pageSignUp" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.controller.RegisterController">
    <children>
-      <Label layoutX="275.0" layoutY="97.0" text="Sign Up">
+      <Label layoutX="925.0" layoutY="97.0" text="Sign Up">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="144.0" layoutY="163.0" prefHeight="25.0" prefWidth="373.0" text="please enter your details to access the healthcare ">
+      <Label layoutX="794.0" layoutY="163.0" prefHeight="25.0" prefWidth="373.0" text="please enter your details to access the healthcare ">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="256.0" layoutY="188.0" text="analytics dashboard">
+      <Label layoutX="906.0" layoutY="188.0" text="analytics dashboard">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <VBox layoutX="82.0" layoutY="272.0" prefHeight="329.0" prefWidth="499.0" spacing="10.0">
+      <VBox layoutX="732.0" layoutY="272.0" prefHeight="329.0" prefWidth="499.0" spacing="10.0">
          <children>
             <HBox prefHeight="56.0" prefWidth="460.0" spacing="10.0">
                <children>
@@ -111,20 +111,25 @@
             </HBox>
          </children>
       </VBox>
-      <JFXButton fx:id="btnSignUp" buttonType="RAISED" layoutX="181.0" layoutY="625.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #51489f; -fx-border-radius: 8; -fx-background-radius: 8;" text="Sign up" textFill="WHITE">
+      <JFXButton fx:id="btnSignUp" buttonType="RAISED" layoutX="831.0" layoutY="625.0" onAction="#btnSignUpOnAction" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #51489f; -fx-border-radius: 8; -fx-background-radius: 8;" text="Sign up" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </JFXButton>
-      <Label layoutX="223.0" layoutY="682.0" text="I already have an accuont!">
+      <Label layoutX="873.0" layoutY="682.0" text="I already have an accuont!">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="btnLoginPage" layoutX="377.0" layoutY="682.0" text="Log in" textFill="#2200ff" underline="true">
+      <Label fx:id="btnLoginPage" layoutX="1027.0" layoutY="682.0" onMouseClicked="#btnLoginPageOnAction" text="Log in" textFill="#2200ff" underline="true">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
+      <ImageView fitHeight="950.0" fitWidth="650.0" layoutX="74.0" layoutY="-132.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+         <image>
+            <Image url="@../assests/image/front-view-man-undergoing-therapy.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -9,8 +9,8 @@ module lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework {
 
     opens lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework to javafx.fxml;
     opens lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.controller to javafx.fxml;
-    opens lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.view.tdm to javafx.base;
+    opens lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.tm to javafx.base;
 
-//    exports lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework;
+    exports lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework;
     exports lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.controller;
 }
