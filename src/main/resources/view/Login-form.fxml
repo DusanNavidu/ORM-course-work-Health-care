@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.controller.LoginController">
+   <children>
+      <ImageView fitHeight="950.0" fitWidth="650.0" layoutX="84.0" layoutY="-142.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+         <image>
+            <Image url="@../assests/image/front-view-man-undergoing-therapy.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="757.0" layoutY="133.0" prefHeight="800.0" prefWidth="640.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label layoutX="217.0" layoutY="123.0" text="Welcome back">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <Label layoutX="136.0" layoutY="196.0" text="please enter your details to access the healthcare">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="245.0" layoutY="221.0" text="analytics dashboard">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <VBox layoutX="76.0" layoutY="323.0" prefHeight="134.0" prefWidth="500.0" spacing="10.0">
+               <children>
+                  <HBox prefHeight="56.0" prefWidth="460.0" spacing="10.0">
+                     <children>
+                        <ImageView>
+                           <image>
+                              <Image url="@../assests/image/icons/user.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="7.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <TextField prefHeight="50.0" prefWidth="400.0" promptText="user name" style="-fx-background-color: white; -fx-border-color: #9AA6B2; -fx-border-width: 2; -fx-border-radius: 5;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="56.0" prefWidth="460.0" spacing="10.0">
+                     <children>
+                        <ImageView>
+                           <image>
+                              <Image url="@../assests/image/icons/locked-computer(1).png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="7.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <TextField prefHeight="50.0" prefWidth="400.0" promptText="password" style="-fx-background-color: white; -fx-border-color: #9AA6B2; -fx-border-width: 2; -fx-border-radius: 5;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                        <ImageView>
+                           <image>
+                              <Image url="@../assests/image/icons/hidden(1).png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="7.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <JFXButton buttonType="RAISED" layoutX="176.0" layoutY="491.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #51489f; -fx-border-radius: 8; -fx-background-radius: 8;" text="Sign up" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <Label layoutX="236.0" layoutY="542.0" text="Don't have an accuont!">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="373.0" layoutY="542.0" text="Sign Up" textFill="#2200ff" underline="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="380.0" layoutY="442.0" text="Forget your password?" textFill="#2200ff" underline="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
