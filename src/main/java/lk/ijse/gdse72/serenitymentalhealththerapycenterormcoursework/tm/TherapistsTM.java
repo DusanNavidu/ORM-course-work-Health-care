@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class UserTM {
-    private int userId;
-    private String userName;
+public class TherapistsTM {
+    private int therapistId;
+    private String therapistName;
+    private String specialization;
     private String email;
-    private int phone;
-    private int password;
+    private String therapyHistory;
 }

@@ -7,11 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class UserTM {
-    private int userId;
-    private String userName;
-    private String email;
-    private int phone;
-    private int password;
+public class TherapyProgramsTM {
+    private int ProgramID;
+    private String ProgramName;
+    private String programDuration;
+    private double programFee;
 }

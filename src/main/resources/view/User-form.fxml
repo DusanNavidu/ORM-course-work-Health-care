@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="pageUser" prefHeight="725.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.controller.UserController">
    <children>
       <HBox layoutX="40.0" layoutY="60.0" prefHeight="220.0" prefWidth="750.0" spacing="20.0" style="-fx-border-color: #d9d9d9; -fx-background-color: #eeeeee; -fx-border-width: 2; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="50.0">
@@ -55,15 +54,15 @@
             </VBox>
             <VBox prefHeight="201.0" prefWidth="460.0" spacing="10.0">
                <children>
-                  <Label fx:id="lblUserId" text="U000-0001" />
-                  <TextField fx:id="txtUsername" />
+                  <Label fx:id="lblUserId" prefHeight="30.0" prefWidth="167.0" />
+                  <TextField fx:id="txtUsername" prefWidth="460.0" />
                   <TextField fx:id="txtEmail" layoutX="10.0" layoutY="27.0" />
                   <TextField fx:id="txtPhoneNumber" layoutX="10.0" layoutY="77.0" />
                   <TextField fx:id="txtPassword" layoutX="10.0" layoutY="142.0" />
                   <TextField fx:id="txtConfirmPassword" layoutX="10.0" layoutY="72.0" />
                </children>
                <HBox.margin>
-                  <Insets top="15.0" />
+                  <Insets />
                </HBox.margin>
             </VBox>
          </children>
@@ -89,7 +88,7 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="371.0" spacing="20.0">
                <children>
-                  <JFXButton fx:id="btnDelete" buttonType="RAISED" onAction="#btnSearchOnAction" prefHeight="35.0" prefWidth="100.0" style="-fx-border-color: red; -fx-background-radius: 5; -fx-border-radius: 5;" text="DELETE" textFill="RED">
+                  <JFXButton fx:id="btnDelete" buttonType="RAISED" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="100.0" style="-fx-border-color: red; -fx-background-radius: 5; -fx-border-radius: 5;" text="DELETE" textFill="RED">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

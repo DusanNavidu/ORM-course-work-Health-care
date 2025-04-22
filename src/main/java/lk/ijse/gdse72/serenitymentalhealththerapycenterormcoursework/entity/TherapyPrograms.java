@@ -13,12 +13,12 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class User {
+
+public class TherapyPrograms {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int userId;
-    private String userName;
-    private String email;
-    private int phone;
-    private int password;
+    private int ProgramID;
+    private String ProgramName;
+    private String programDuration;
+    private double programFee;
 }
