@@ -13,18 +13,12 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+
 public class TherapyPrograms {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int programID;
-
-    private String programName;
+    private int ProgramID;
+    private String ProgramName;
     private String programDuration;
-
-    @Column(precision = 10, scale = 2)
     private double programFee;
-
-    @OneToMany(mappedBy = "program", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Payment> payments;
 }
-

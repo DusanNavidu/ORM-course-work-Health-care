@@ -5,4 +5,5 @@ import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.entity.Ther
 
 public interface TherapyProgramsDAO extends CrudDAO<TherapyPrograms, String> {
 
+//    String getTherapyProgramNameById(String therapyProgramId) throws Exception;
 }

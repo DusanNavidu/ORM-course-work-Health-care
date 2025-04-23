@@ -28,6 +28,8 @@ public class BOFactory {
                 return (T) new PatientsBOImpl();
             case USER:
                 return (T) new UserBOImpl();
+            case PAYMENT:
+                return (T) new PaymentBOImpl();
             default:
                 return null;
         }

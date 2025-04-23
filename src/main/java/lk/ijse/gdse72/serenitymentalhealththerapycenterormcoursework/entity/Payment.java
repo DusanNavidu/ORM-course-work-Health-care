@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -25,9 +24,9 @@ public class Payment {
     @Temporal(TemporalType.TIME)
     private Date paymentTime;
 
-    @ManyToOne
-    @JoinColumn(name = "program_id")
-    private TherapyPrograms program;
+//    @ManyToOne
+//    @JoinColumn(name = "program_id")
+//    private TherapyPrograms program;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")

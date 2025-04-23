@@ -92,4 +92,15 @@ public class PatientDAOImpl implements PatientDAO {
     public Patient findById(String id) {
         return null;
     }
+
+    @Override
+    public String getPatientNameById(String patientId) throws Exception {
+        Session session = SessionFactoryConfig.getInstance().getSession();
+        try {
+            Patient patient = session.get(Patient.class, Integer.parseInt(patientId));
+            return (patient != null) ? patient.getName() : null;
+        } finally {
+            session.close();
+        }
+    }
 }

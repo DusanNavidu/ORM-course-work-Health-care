@@ -5,4 +5,5 @@ import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.entity.Pati
 
 public interface PatientDAO extends CrudDAO<Patient, String> {
 
+    String getPatientNameById(String patientId) throws Exception;
 }

@@ -82,7 +82,7 @@ public class DashboardController {
     @FXML
     void btnPaymentOnAction(ActionEvent event) {
         highlightButton(btnPayment);
-
+        navigateTo("/view/Payment-form.fxml");
     }
 
     @FXML

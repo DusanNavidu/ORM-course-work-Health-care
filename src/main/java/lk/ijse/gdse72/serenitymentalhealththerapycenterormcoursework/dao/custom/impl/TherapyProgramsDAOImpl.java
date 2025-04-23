@@ -91,4 +91,15 @@ public class TherapyProgramsDAOImpl implements TherapyProgramsDAO {
     public TherapyPrograms findById(String id) {
         return null;
     }
+
+//    @Override
+//    public String getTherapyProgramNameById(String therapyProgramId) throws Exception {
+//        Session session = SessionFactoryConfig.getInstance().getSession();
+//        try {
+//            TherapyPrograms program = session.get(TherapyPrograms.class, Integer.parseInt(therapyProgramId));
+//            return (program != null) ? program.getProgramName() : null;
+//        } finally {
+//            session.close();
+//        }
+//    }
 }

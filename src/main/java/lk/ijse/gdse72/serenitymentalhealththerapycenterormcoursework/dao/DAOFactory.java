@@ -15,7 +15,7 @@ public class DAOFactory {
     }
 
     public enum DAOType {
-        USER , THERAPY_PROGRAM , PATIENT
+        USER , THERAPY_PROGRAM , PATIENT , PAYMENT
     }
 
     public SuperDAO getDAO(DAOType daoType) {

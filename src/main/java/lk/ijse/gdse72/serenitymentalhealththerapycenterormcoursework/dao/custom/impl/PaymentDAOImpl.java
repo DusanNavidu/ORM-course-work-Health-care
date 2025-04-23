@@ -1,15 +1,33 @@
 package lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dao.custom.impl;
 
+import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.config.SessionFactoryConfig;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dao.custom.PaymentDAO;
+import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.entity.Patient;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.entity.Payment;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PaymentDAOImpl implements PaymentDAO {
 
     @Override
     public boolean save(Payment entity) throws Exception {
-        return false;
+        Session session = SessionFactoryConfig.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            session.persist(entity);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            transaction.rollback();
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
     }
 
     @Override
@@ -24,7 +42,21 @@ public class PaymentDAOImpl implements PaymentDAO {
 
     @Override
     public ArrayList<Payment> getAll() throws Exception {
-        return null;
+        Session session = SessionFactoryConfig.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        ArrayList<Payment> payments = new ArrayList<>();
+
+        try {
+            List<Payment> paymentList = session.createQuery("FROM Payment ", Payment.class).list();
+            payments.addAll(paymentList);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return payments;
     }
 
     @Override
