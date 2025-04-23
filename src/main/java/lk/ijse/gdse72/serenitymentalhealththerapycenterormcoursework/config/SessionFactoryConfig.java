@@ -2,6 +2,7 @@ package lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.config;
 
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.entity.Patient;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.entity.TherapyPrograms;
+import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -14,7 +15,7 @@ public class SessionFactoryConfig {
     public SessionFactoryConfig(){
         try {
             Configuration configuration = new Configuration().configure("hibernate.cfg.xml")
-//                    .addAnnotatedClass(User.class)
+                    .addAnnotatedClass(User.class)
                     .addAnnotatedClass(Patient.class)
 //                    .addAnnotatedClass(Payment.class)
 //                    .addAnnotatedClass(Appointment.class)

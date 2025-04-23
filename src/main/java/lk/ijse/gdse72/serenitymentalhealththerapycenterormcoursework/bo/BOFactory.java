@@ -26,6 +26,8 @@ public class BOFactory {
                 return (T) new TherapyProgramsBOImpl();
             case PATIENT:
                 return (T) new PatientsBOImpl();
+            case USER:
+                return (T) new UserBOImpl();
             default:
                 return null;
         }

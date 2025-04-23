@@ -2,6 +2,7 @@ package lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dao;
 
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dao.custom.impl.PatientDAOImpl;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dao.custom.impl.TherapyProgramsDAOImpl;
+import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dao.custom.impl.UserDAOImpl;
 
 public class DAOFactory {
     private static DAOFactory daoFactory;
@@ -19,12 +20,12 @@ public class DAOFactory {
 
     public SuperDAO getDAO(DAOType daoType) {
         switch (daoType) {
-//            case USER:
-//                return new UserDAOImpl();
             case THERAPY_PROGRAM:
                 return new TherapyProgramsDAOImpl();
             case PATIENT:
                 return new PatientDAOImpl();
+            case USER:
+                return new UserDAOImpl();
             default:
                 return null;
         }

@@ -1,9 +1,9 @@
 package lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.controller;
 
 import com.jfoenix.controls.JFXButton;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
@@ -41,10 +41,13 @@ public class TherapistsController {
     private JFXButton btnsave;
 
     @FXML
+    private TableColumn<?, ?> colSpecialization;
+
+    @FXML
     private TableColumn<?, ?> colTherapistsID;
 
     @FXML
-    private TableColumn<?, ?> comSpecialization;
+    private ComboBox<?> comSpecialization;
 
     @FXML
     private TableColumn<?, ?> comTherapistsAvailability;
@@ -72,9 +75,6 @@ public class TherapistsController {
 
     @FXML
     private TextField txtPhone;
-
-    private String selectTherapistId;
-//    private final ObservableList<>
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {

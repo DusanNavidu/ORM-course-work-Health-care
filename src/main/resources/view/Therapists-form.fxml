@@ -131,7 +131,7 @@
         <columns>
           <TableColumn fx:id="colTherapistsID" prefWidth="98.0" text="Therapists ID" />
           <TableColumn fx:id="comTherapistsName" prefWidth="199.0" text="Therapists Name" />
-            <TableColumn fx:id="comSpecialization" prefWidth="263.0" text="Specialization" />
+            <TableColumn fx:id="colSpecialization" prefWidth="263.0" text="Specialization" />
             <TableColumn fx:id="comTherapistsEmail" prefWidth="136.0" text="Therapists Email" />
             <TableColumn fx:id="comTherapistsPhone" prefWidth="170.0" text="Therapists C.no:" />
             <TableColumn fx:id="comTherapistsAvailability" prefWidth="153.0" text="Therapists Availability" />
