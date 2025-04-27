@@ -1,38 +1,41 @@
 package lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dao.custom.impl;
 
-import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.config.SessionFactoryConfig;
+
+import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.config.FactoryConfiguration;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dao.custom.PatientDAO;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.entity.Patient;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PatientDAOImpl implements PatientDAO {
-    @Override
-    public boolean save(Patient entity) throws Exception {
-        Session session = SessionFactoryConfig.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
 
+    private final FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
+
+    @Override
+    public boolean save(Patient entity) {
+        Session session = factoryConfiguration.getSession();
+        Transaction transaction = session.beginTransaction();
         try {
             session.persist(entity);
             transaction.commit();
             return true;
-        } catch (Exception e) {
+        }catch (Exception e) {
             transaction.rollback();
-            e.printStackTrace();
             return false;
-        } finally {
-            session.close();
+        }finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     @Override
-    public boolean update(Patient entity) throws Exception {
-        Session session = SessionFactoryConfig.getInstance().getSession();
+    public boolean update(Patient entity) {
+        Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
-
         try {
             session.merge(entity);
             transaction.commit();
@@ -42,65 +45,78 @@ public class PatientDAOImpl implements PatientDAO {
             e.printStackTrace();
             return false;
         } finally {
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
+
     @Override
-    public boolean delete(String id) throws Exception {
-        Session session = SessionFactoryConfig.getInstance().getSession();
+    public boolean delete(String pk) {
+        Session session = factoryConfiguration.getSession();
         Transaction transaction = session.beginTransaction();
         try {
-            session.remove(id);
-            transaction.commit();
-            return true;
-        } catch (Exception e) {
-            transaction.rollback();
-            e.printStackTrace();
+            Patient patient = session.find(Patient.class, pk);
+            if (patient!= null) {
+                session.remove(patient);
+                transaction.commit();
+                return true;
+            }
             return false;
-        } finally {
-            session.close();
+        }catch (Exception e) {
+            transaction.rollback();
+            return false;
+        }finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
+    @Override
+    public List<Patient> getAll() {
+        Session session = factoryConfiguration.getSession();
+        List<Patient> patient = session.createQuery("FROM Patient", Patient.class).list();
+        session.close();
+        return patient;
+    }
 
     @Override
-    public ArrayList<Patient> getAll() throws Exception {
-        Session session = SessionFactoryConfig.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
-        ArrayList<Patient> patients = new ArrayList<>();
+    public Optional<Patient> findByName(String pk) {
+        return Optional.empty();
+    }
 
-        try {
-            List<Patient> patientList = session.createQuery("FROM Patient", Patient.class).list();
-            patients.addAll(patientList);
-            transaction.commit();
-        } catch (Exception e) {
-            transaction.rollback();
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+    @Override
+    public List<Patient> findByPatientName(String name) {
+        Session session = factoryConfiguration.getSession();
+        List<Patient> patients = session.createQuery("FROM Patient p WHERE p.name LIKE :name", Patient.class)
+                .setParameter("name", "%" + name + "%")
+                .list();
+        session.close();
+
         return patients;
     }
 
     @Override
-    public String generateNewID() throws Exception {
-        return "";
+    public Optional<Patient> findById(String pk) {
+        Session session = factoryConfiguration.getSession();
+        Patient patient = session.get(Patient.class, pk);
+        session.close();
+        return Optional.ofNullable(patient);
     }
 
-    @Override
-    public Patient findById(String id) {
-        return null;
-    }
 
     @Override
-    public String getPatientNameById(String patientId) throws Exception {
-        Session session = SessionFactoryConfig.getInstance().getSession();
-        try {
-            Patient patient = session.get(Patient.class, Integer.parseInt(patientId));
-            return (patient != null) ? patient.getName() : null;
-        } finally {
-            session.close();
-        }
+    public Optional<String> getLastPK() {
+        Session session = factoryConfiguration.getSession();
+        String lastPk = session.createQuery("SELECT p.patient_id FROM Patient p ORDER BY p.patient_id DESC", String.class)
+                .setMaxResults(1)
+                .uniqueResult();
+        session.close();
+
+        return Optional.ofNullable(lastPk);
     }
+
+
 }

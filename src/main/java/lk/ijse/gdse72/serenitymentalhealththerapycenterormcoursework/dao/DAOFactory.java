@@ -1,8 +1,6 @@
 package lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dao;
 
-import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dao.custom.impl.PatientDAOImpl;
-import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dao.custom.impl.TherapyProgramsDAOImpl;
-import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dao.custom.impl.UserDAOImpl;
+import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dao.custom.impl.*;
 
 public class DAOFactory {
     private static DAOFactory daoFactory;
@@ -10,20 +8,40 @@ public class DAOFactory {
     private DAOFactory() {
     }
 
-    public static DAOFactory getDaoFactory() {
-        return (daoFactory == null) ? daoFactory = new DAOFactory() : daoFactory;
+    public static DAOFactory getInstance() {
+        return (daoFactory == null) ? (daoFactory = new DAOFactory()) : daoFactory;
     }
 
     public enum DAOType {
-        USER , THERAPY_PROGRAM , PATIENT , PAYMENT
+        PATIENT,
+        PATIENT_PROGRAM,
+        PAYMENT,
+        THERAPIST,
+        THERAPIST_AVAILABILITY,
+        THERAPIST_PROGRAM,
+        THERAPY_PROGRAM,
+        THERAPY_SESSION,
+        USER
     }
 
-    public SuperDAO getDAO(DAOType daoType) {
-        switch (daoType) {
-            case THERAPY_PROGRAM:
-                return new TherapyProgramsDAOImpl();
+    public SuperDAO getDAO(DAOType type) {
+        switch (type) {
             case PATIENT:
                 return new PatientDAOImpl();
+            case PATIENT_PROGRAM:
+                return new PatientProgramDAOImpl();
+            case PAYMENT:
+                return new PaymentDAOImpl();
+            case THERAPIST:
+                return new TherapistDAOImpl();
+            case THERAPIST_AVAILABILITY:
+                return new TherapistAvailabilityDAOImpl();
+            case THERAPIST_PROGRAM:
+                return new TherapistProgramDAOImpl();
+            case THERAPY_PROGRAM:
+                return new TherapyProgramDAOImpl();
+            case THERAPY_SESSION:
+                return new TherapySessionDAOImpl();
             case USER:
                 return new UserDAOImpl();
             default:

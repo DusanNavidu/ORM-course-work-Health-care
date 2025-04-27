@@ -1,6 +1,6 @@
 package lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.bo;
 
-import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.bo.custom.boImpl.*;
+import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.bo.custom.impl.*;
 
 public class BOFactory {
     private static BOFactory boFactory;
@@ -8,30 +8,45 @@ public class BOFactory {
     private BOFactory() {
     }
 
-    public static BOFactory getBoFactory() {
-        if (boFactory == null) {
-            boFactory = new BOFactory();
-        }
-        return boFactory;
-    }
-    public enum BOType {
-        USER , THERAPY_PROGRAM , PATIENT , PAYMENT , THERAPIST , APPOINTMENT , THERAPY_SESSION
+    public static BOFactory getInstance() {
+        return (boFactory == null) ? (boFactory = new BOFactory()) : boFactory;
     }
 
-    public <T> T getBO(BOType boType) {
-        switch (boType) {
-//            case USER:
-//                return (T) new UserBOImpl();
-            case THERAPY_PROGRAM:
-                return (T) new TherapyProgramsBOImpl();
+    public enum BOType {
+        PATIENT,
+        PATIENT_PROGRAM,
+        PAYMENT,
+        THERAPIST,
+        THERAPIST_AVAILABILITY,
+        THERAPIST_PROGRAM,
+        THERAPY_PROGRAM,
+        THERAPY_SESSION,
+        USER
+    }
+
+    public SuperBO getBO(BOType type) {
+        switch (type) {
             case PATIENT:
-                return (T) new PatientsBOImpl();
-            case USER:
-                return (T) new UserBOImpl();
+                return new PatientBOImpl();
+            case PATIENT_PROGRAM:
+                return new PatientProgramBOImpl();
             case PAYMENT:
-                return (T) new PaymentBOImpl();
+                return new PaymentBOImpl();
+            case THERAPIST:
+                return new TherapistBOImpl();
+            case THERAPIST_AVAILABILITY:
+                return new TherapistAvailabilityBOImpl();
+            case THERAPIST_PROGRAM:
+                return new TherapistProgramBOImpl();
+            case THERAPY_PROGRAM:
+                return new TherapyProgramBOImpl();
+            case THERAPY_SESSION:
+                return new TherapySessionBOImpl();
+            case USER:
+                return new UserBOImpl();
             default:
                 return null;
         }
     }
+
 }

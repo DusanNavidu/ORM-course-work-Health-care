@@ -1,22 +1,18 @@
 package lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.controller;
 
 import com.jfoenix.controls.JFXButton;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.bo.BOFactory;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.bo.custom.UserBO;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.tm.UserTM;

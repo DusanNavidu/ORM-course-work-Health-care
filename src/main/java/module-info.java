@@ -8,6 +8,7 @@ module lk.ijse.gdse.serenitymentalhealththerapycenterormcoursework {
     requires jakarta.persistence;
     requires org.hibernate.orm.core;
     requires java.naming;
+    requires spring.security.crypto;
 
     opens lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework to javafx.fxml;
     opens lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.controller to javafx.fxml;

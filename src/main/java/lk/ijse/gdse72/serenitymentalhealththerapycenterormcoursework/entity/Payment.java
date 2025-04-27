@@ -6,31 +6,32 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-public class Payment {
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
+@Table(name = "payment")
+public class Payment implements SuperEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int paymentId;
-
-    @Temporal(TemporalType.DATE)
-    private Date paymentDate;
-
-    @Temporal(TemporalType.TIME)
-    private Date paymentTime;
-
-//    @ManyToOne
-//    @JoinColumn(name = "program_id")
-//    private TherapyPrograms program;
+    private String payment_id;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;
 
-    private String amount;
+    @ManyToOne
+    @JoinColumn(name = "program_id", nullable = false)
+    private TherapyProgram therapy_program;
+
+    @ManyToOne
+    @JoinColumn(name = "session_id")
+    private TherapySession therapy_session;  // Nullable for upfront payments
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal amount;
+
+    @Column(nullable = false)
+    private LocalDate payment_date;
 }

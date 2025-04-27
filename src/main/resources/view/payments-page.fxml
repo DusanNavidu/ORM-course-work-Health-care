@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="bodyPane" prefHeight="725.0" prefWidth="1080.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.controller.PaymentsController">
+   <children>
+      <HBox fx:id="sessionIdPart" layoutX="837.0" layoutY="174.0" prefHeight="34.0" prefWidth="314.0" />
+      <TableView fx:id="paymentsTable" layoutX="59.0" layoutY="344.0" onMouseClicked="#tableClick" prefHeight="288.0" prefWidth="1091.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0">
+        <columns>
+          <TableColumn fx:id="paymentIdCol" prefWidth="145.59997177124023" text="Payment ID" />
+          <TableColumn fx:id="patientIdCol" prefWidth="178.0" text="Patient ID" />
+            <TableColumn fx:id="programIdCol" prefWidth="152.0" text="Program ID" />
+            <TableColumn fx:id="sessionIdCol" prefWidth="193.0" text="Session ID" />
+            <TableColumn fx:id="amountCol" prefWidth="300.0" text="Amount" />
+            <TableColumn fx:id="dateCol" prefWidth="121.0" text="Date" />
+        </columns>
+      </TableView>
+      <VBox layoutX="38.0" layoutY="24.0" prefHeight="304.0" prefWidth="784.0" spacing="10.0" style="-fx-background-color: #eeeeee; -fx-border-color: #d9d9d9; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-width: 2;" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <HBox prefHeight="35.0" prefWidth="450.0">
+               <children>
+                  <Label prefHeight="20.0" prefWidth="200.0" styleClass="text-label" text="Payment ID">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="paymentIdTxt" prefHeight="26.0" prefWidth="171.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="35.0" prefWidth="450.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="200.0" styleClass="text-label" text="Patient Name">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="patientNameTxt" prefHeight="26.0" prefWidth="283.0" />
+                  <JFXButton fx:id="patientSearchButton" buttonType="RAISED" onAction="#searchPatientOnAction" prefHeight="35.0" prefWidth="100.0" style="-fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="SEARCH">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="35.0" prefWidth="450.0">
+               <children>
+                  <Label prefHeight="20.0" prefWidth="200.0" styleClass="text-label" text="Program ">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="programNameTxt" prefHeight="26.0" prefWidth="283.0" />
+                  <JFXButton fx:id="programSearchButton" buttonType="RAISED" onAction="#searchProgramOnAction" prefHeight="35.0" prefWidth="100.0" style="-fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" text="SEARCH">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="35.0" prefWidth="450.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="200.0" styleClass="text-label" text="Payment Type">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="paymentTypeChoice" prefHeight="26.0" prefWidth="200.0" styleClass="text-field" />
+                  <Label prefHeight="27.0" prefWidth="200.0" styleClass="text-label" text="Patient ID">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="patientIdTxt" prefHeight="26.0" prefWidth="130.0" />
+               </children>
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="35.0" prefWidth="450.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="200.0" styleClass="text-label" text="Amount">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="amountTxt" prefHeight="26.0" prefWidth="200.0" />
+                  <Label prefHeight="25.0" prefWidth="200.0" styleClass="text-label" text="Program ID">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="programIdTxt" prefHeight="26.0" prefWidth="130.0" />
+               </children>
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="35.0" prefWidth="450.0">
+               <children>
+                  <Label prefHeight="20.0" prefWidth="200.0" text="Date">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="dateTxt" prefHeight="25.0" prefWidth="200.0" styleClass="text-field" />
+                  <Label prefHeight="18.0" prefWidth="200.0" styleClass="text-label" text="Session ID">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="sessionIdTxt" prefHeight="26.0" prefWidth="130.0" />
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </HBox>
+         </children>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </VBox>
+      <VBox layoutX="837.0" layoutY="39.0" prefHeight="304.0" prefWidth="248.0" spacing="10.0" style="-fx-background-color: #eeeeee; -fx-border-color: #d9d9d9; -fx-border-width: 2; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="371.0" spacing="20.0">
+               <children>
+                  <JFXButton fx:id="btnDelete" buttonType="RAISED" onAction="#btnDeleteOnAcion" prefHeight="35.0" prefWidth="100.0" style="-fx-border-color: red; -fx-background-radius: 5; -fx-border-radius: 5;" text="DELETE" textFill="RED">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnUpdate" buttonType="RAISED" layoutX="10.0" layoutY="10.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="100.0" style="-fx-border-color: #b9b90d; -fx-background-radius: 5; -fx-border-radius: 5;" text="UPDATE" textFill="#b9b90d">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="371.0" spacing="20.0">
+               <children>
+                  <JFXButton fx:id="btnResert" buttonType="RAISED" onAction="#btnResertOnAction" prefHeight="35.0" prefWidth="220.0" style="-fx-border-color: blue; -fx-background-radius: 5; -fx-border-radius: 5;" text="RESERT" textFill="BLUE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="69.0" prefHeight="40.0" prefWidth="371.0">
+               <children>
+                  <JFXButton fx:id="btnSave" buttonType="RAISED" layoutX="10.0" layoutY="10.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="220.0" style="-fx-border-color: green; -fx-background-radius: 5; -fx-border-radius: 5;" text="SAVE" textFill="GREEN">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="128.0" prefHeight="40.0" prefWidth="371.0">
+               <children>
+                  <JFXButton fx:id="btnEmail" buttonType="RAISED" layoutX="10.0" layoutY="10.0" onAction="#btnEmailOnAction" prefHeight="35.0" prefWidth="220.0" style="-fx-border-color: #b203b9; -fx-background-radius: 5; -fx-border-radius: 5;" text="SEND EMAIL" textFill="#b203b9">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets top="40.0" />
+         </padding>
+      </VBox>
+      <HBox layoutX="67.0" layoutY="345.0" prefHeight="35.0" prefWidth="980.0" spacing="20.0">
+         <children>
+            <TextField fx:id="searchTxt" prefHeight="35.0" prefWidth="825.0" />
+            <JFXButton fx:id="btnSearch" buttonType="RAISED" onAction="#btnSearchOnAction" prefHeight="35.0" prefWidth="100.0" style="-fx-border-color: #0098ff; -fx-background-radius: 5; -fx-border-radius: 5;" text="SEARCH" textFill="#0098ff">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

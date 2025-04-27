@@ -1,20 +1,31 @@
 package lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.tm;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.sql.Time;
-import java.util.Date;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class PaymentTM {
-    private int paymentId;
-    private String date;
-    private String time;
-    private int programId;
-    private int patientId;
-    private String amount;
+    private String paymentId;
+    private String patientId;
+    private String therapyProgramId;
+    private String therapySessionId;  // Nullable for upfront payments
+    private BigDecimal amount;
+    private LocalDate paymentDate;
+
+    public PaymentTM(boolean isSearch, String paymentId, String patient, String program, String session, BigDecimal amount, LocalDate paymentDate) {
+        this.paymentId = paymentId;
+        this.patientId = patient;
+        this.therapyProgramId = program;
+        this.therapySessionId = session != null ? session : "N/A";
+        this.amount = BigDecimal.valueOf(amount.doubleValue());
+        this.paymentDate = paymentDate;
+    }
+
 }

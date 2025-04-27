@@ -1,18 +1,16 @@
 package lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dao;
 
-import java.util.ArrayList;
 
-public interface CrudDAO<T, ID> extends SuperDAO {
-    boolean save(T entity) throws Exception;
+import java.util.List;
+import java.util.Optional;
 
-    boolean update(T entity) throws Exception;
 
-    boolean delete(String id) throws Exception;
-
-    ArrayList<T> getAll() throws Exception;
-
-    String generateNewID() throws Exception;
-
-    T findById(String id);
+public interface CrudDAO <T> extends SuperDAO{
+     boolean save(T entity);
+     boolean update(T entity);
+     boolean delete(String pk);
+     List<T> getAll();
+     Optional<T> findByName(String pk);
+     Optional<String> getLastPK();
 
 }

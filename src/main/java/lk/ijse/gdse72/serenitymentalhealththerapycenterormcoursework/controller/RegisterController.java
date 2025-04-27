@@ -16,7 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.bo.BOFactory;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.bo.custom.UserBO;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dto.UserDTO;
-import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.tm.UserTM;
 
 import java.io.IOException;
 import java.net.URL;

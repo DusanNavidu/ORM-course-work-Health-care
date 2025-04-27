@@ -1,6 +1,5 @@
 package lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.controller;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,204 +7,234 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.bo.BOFactory;
-import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.bo.custom.TherapyProgramsBO;
-import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dto.TherapyProgramsDTO;
-import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.tm.TherapyProgramsTM;
+import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.bo.custom.TherapyProgramBO;
+import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.bo.custom.impl.TherapyProgramBOImpl;
+import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dto.TherapyProgramDTO;
+import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.tm.TherapyProgramTM;
 
+
+import java.math.BigDecimal;
 import java.net.URL;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class TherapyProgramsController implements Initializable {
 
     @FXML
-    private AnchorPane TherapyProgramsPage;
+    private TableColumn<TherapyProgramTM, String> programDurationCol;
 
     @FXML
-    private JFXButton btnDelete;
+    private TableColumn<TherapyProgramTM, String> programNameCol;
 
     @FXML
-    private JFXButton btnResert;
+    private Button deleteButton;
 
     @FXML
-    private JFXButton btnSave;
+    private TextField durationTxt;
 
     @FXML
-    private JFXButton btnSearch;
+    private TextArea descriptionTxt;
 
     @FXML
-    private JFXButton btnUpdate;
+    private TextField feeTxt;
 
     @FXML
-    private TableColumn<TherapyProgramsTM , String> colDuration;
+    private TableColumn<TherapyProgramTM, String> patientEmailCol;
 
     @FXML
-    private TableColumn<TherapyProgramsTM , Double> colFee;
+    private TableColumn<TherapyProgramTM, BigDecimal> programFeeCol;
 
     @FXML
-    private TableColumn<TherapyProgramsTM , Integer> colProgramId;
+    private TableColumn<TherapyProgramTM, String> programIdCol;
 
     @FXML
-    private TableColumn<TherapyProgramsTM , String> colProgramName;
+    private TextField programIdTxt;
 
     @FXML
-    private Label lblProgramId;
+    private TextField programNameTxt;
 
     @FXML
-    private TableView<TherapyProgramsTM> tblTherapyPrograms;
+    private TableColumn<TherapyProgramTM, String> programDescriptionCol;
 
     @FXML
-    private TextField txtDuration;
+    private Button saveButton;
 
     @FXML
-    private TextField txtFee;
+    private Button searchButton;
 
     @FXML
-    private TextField txtProgramName;
+    private TextField searchTxt;
 
-    private String selectedProgramId;
-    private final ObservableList<TherapyProgramsTM> therapyProgramsList = FXCollections.observableArrayList();
-    private TherapyProgramsBO therapyProgramsBO;
+    @FXML
+    private TableView<TherapyProgramTM> therapyProgramsTable;
+
+    @FXML
+    private Button updateButton;
+
+    @FXML
+    private AnchorPane bodyPane;
+
+    private final TherapyProgramBO therapyProgramBO = new TherapyProgramBOImpl();
+
+
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        therapyProgramsBO = (TherapyProgramsBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.THERAPY_PROGRAM);
-        setCellValueFactory();
-        loadTherapyProgramsData();
-        setTableListener();
-        btnDelete.setDisable(true);
-        btnUpdate.setDisable(true);
-    }
+    public void initialize(URL location, ResourceBundle resources) {
 
-    private void loadTherapyProgramsData() {
-        therapyProgramsList.clear();
-        try {
-            List<TherapyProgramsDTO> therapyPrograms = therapyProgramsBO.getAllTherapyPrograms();
-            for (TherapyProgramsDTO dto : therapyPrograms) {
-                therapyProgramsList.add(new TherapyProgramsTM(
-                        dto.getProgramID(),
-                        dto.getProgramName(),
-                        dto.getProgramDuration(),
-                        dto.getProgramFee()
-                ));
-            }
-            tblTherapyPrograms.setItems(therapyProgramsList);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+        programIdCol.setCellValueFactory(new PropertyValueFactory<>("programId"));
+        programNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        programDurationCol.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        programFeeCol.setCellValueFactory(new PropertyValueFactory<>("fee"));
+        programDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
 
-    private void setTableListener() {
-        tblTherapyPrograms.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                setTherapyProgramsData(newValue);
-            }
-        });
-    }
-
-    private void setCellValueFactory() {
-        colProgramId.setCellValueFactory(new PropertyValueFactory<>("ProgramID"));
-        colProgramName.setCellValueFactory(new PropertyValueFactory<>("programName"));
-        colDuration.setCellValueFactory(new PropertyValueFactory<>("programDuration"));
-        colFee.setCellValueFactory(new PropertyValueFactory<>("programFee"));
-    }
-
-    private void setTherapyProgramsData(TherapyProgramsTM therapyPrograms) {
-        selectedProgramId = String.valueOf(therapyPrograms.getProgramID());
-        txtProgramName.setText(therapyPrograms.getProgramName());
-        txtDuration.setText(therapyPrograms.getProgramDuration());
-        txtFee.setText(String.valueOf(therapyPrograms.getProgramFee()));
-
-        btnDelete.setDisable(false);
-        btnUpdate.setDisable(false);
-    }
-
-    private void refreshPage(){
-        selectedProgramId = null;
-        txtProgramName.clear();
-        txtDuration.clear();
-        txtFee.clear();
-
-        btnDelete.setDisable(true);
-        btnUpdate.setDisable(true);
-    }
-    @FXML
-    void btnDeleteOnAction(ActionEvent event) throws Exception {
-        if (selectedProgramId != null) {
-            boolean isDeleted = therapyProgramsBO.deleteTherapyProgram(selectedProgramId);
-            if (isDeleted) {
-                new Alert(Alert.AlertType.INFORMATION, "Therapy Program deleted successfully!").show();
-                loadTherapyProgramsData();
-                refreshPage();
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Failed to delete therapy program!").show();
-            }
-        }
-    }
-
-    @FXML
-    void btnResertOnAcion(ActionEvent event) {
         refreshPage();
     }
 
-    @FXML
-    void btnSaveOnAction(ActionEvent event) {
+    public void refreshPage() {
+        programIdTxt.clear();
+        programNameTxt.clear();
+        durationTxt.clear();
+        feeTxt.clear();
+        descriptionTxt.clear();
+
         try {
-            String programName = txtProgramName.getText();
-            String programDuration = txtDuration.getText();
-            String programFee = txtFee.getText();
-
-            TherapyProgramsDTO therapyProgramsDTO = new TherapyProgramsDTO(programName, programDuration , programFee);
-
-            boolean isSaved = therapyProgramsBO.saveTherapyProgram(therapyProgramsDTO);
-
-            if (isSaved) {
-                new Alert(Alert.AlertType.INFORMATION, "Therapy Program saved successfully!").show();
-                refreshPage();
-                loadTherapyProgramsData();
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Failed to save Therapy Program!").show();
-            }
+            programIdTxt.setText(therapyProgramBO.getNextTherapyProgramPK());
+            refreshTable();
         } catch (Exception e) {
             e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "Error occurred while saving Therapy Program!").show();
+        }
+    }
+
+    public void refreshTable() {
+        ArrayList<TherapyProgramDTO> programDtos = therapyProgramBO.getAllTherapyPrograms();
+        if (programDtos != null && !programDtos.isEmpty()) {
+            ObservableList<TherapyProgramTM> programTMS = FXCollections.observableArrayList();
+            for (TherapyProgramDTO dto : programDtos) {
+                TherapyProgramTM program = new TherapyProgramTM(
+                        dto.getProgramId(),
+                        dto.getName(),
+                        dto.getDuration(),
+                        dto.getFee(),
+                        dto.getDescription()
+                );
+                programTMS.add(program);
+            }
+            therapyProgramsTable.setItems(programTMS);
+        } else {
+            therapyProgramsTable.setItems(FXCollections.emptyObservableList());
         }
     }
 
     @FXML
-    void btnSearchOnAction(ActionEvent event) {
-
+    void delete(ActionEvent event) {
+        String programId = programIdTxt.getText();
+        if (therapyProgramBO.deleteTherapyProgram(programId)) {
+            showAlert("Success", "Program deleted successfully", Alert.AlertType.INFORMATION);
+            refreshPage();
+        } else {
+            showAlert("Error", "Failed to delete program", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
-    void btnUpdateOnAction(ActionEvent event) {
-        if (selectedProgramId == null) {
-            new Alert(Alert.AlertType.WARNING, "Please select a Therapy Program to update!").show();
+    void save(ActionEvent event) {
+        try {
+            BigDecimal fee = new BigDecimal(feeTxt.getText().trim());
+            TherapyProgramDTO programDto = new TherapyProgramDTO(
+                    programIdTxt.getText(),
+                    programNameTxt.getText(),
+                    durationTxt.getText(),
+                    fee,
+                    descriptionTxt.getText()
+            );
+
+            if (therapyProgramBO.saveTherapyProgram(programDto)) {
+                showAlert("Success", "Program saved successfully", Alert.AlertType.INFORMATION);
+                refreshPage();
+            } else {
+                showAlert("Error", "Failed to save program", Alert.AlertType.ERROR);
+            }
+        } catch (NumberFormatException e) {
+            showAlert("Input Error", "Please enter a valid fee", Alert.AlertType.WARNING);
+        }
+    }
+
+    @FXML
+    void search(ActionEvent event) {
+        String name = searchTxt.getText().trim();
+
+        if (name.isEmpty()) {
+            showAlert("Input Error", "Please enter a program name to search", Alert.AlertType.WARNING);
+            refreshPage();
             return;
         }
 
-        try {
-            String programName = txtProgramName.getText();
-            String programDuration = txtDuration.getText();
-            String programFee = txtFee.getText();
+        ArrayList<TherapyProgramDTO> programDtos = therapyProgramBO.findTherapyProgramByName(name);
 
-            TherapyProgramsDTO therapyProgramsDTO = new TherapyProgramsDTO(programName, programDuration , programFee);
-
-            boolean isUpdated = therapyProgramsBO.updateTherapyProgram(therapyProgramsDTO);
-
-            if (isUpdated) {
-                new Alert(Alert.AlertType.INFORMATION, "Therapy Program updated successfully!").show();
-                refreshPage();
-                loadTherapyProgramsData();
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Failed to update Therapy Program!").show();
+        if (programDtos != null && !programDtos.isEmpty()) {
+            ObservableList<TherapyProgramTM> programTMS = FXCollections.observableArrayList();
+            for (TherapyProgramDTO dto : programDtos) {
+                TherapyProgramTM programTM = new TherapyProgramTM(
+                        dto.getProgramId(),
+                        dto.getName(),
+                        dto.getDuration(),
+                        dto.getFee(),
+                        dto.getDescription()
+                );
+                programTMS.add(programTM);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "Error occurred while updating Therapy Program!").show();
+
+            therapyProgramsTable.setItems(programTMS);
+        } else {
+            showAlert("Not Found", "No program found with that name", Alert.AlertType.WARNING);
+            therapyProgramsTable.setItems(FXCollections.emptyObservableList());
         }
     }
+
+    @FXML
+    void tableClick(MouseEvent event) {
+        TherapyProgramTM selectedProgram = therapyProgramsTable.getSelectionModel().getSelectedItem();
+        if (selectedProgram != null) {
+            programIdTxt.setText(selectedProgram.getProgramId());
+            programNameTxt.setText(selectedProgram.getName());
+            durationTxt.setText(selectedProgram.getDuration());
+            feeTxt.setText(selectedProgram.getFee().toString());
+            descriptionTxt.setText(selectedProgram.getDescription());
+        }
+    }
+
+    @FXML
+    void update(ActionEvent event) {
+        try {
+            BigDecimal fee = new BigDecimal(feeTxt.getText().trim());
+            TherapyProgramDTO programDto = new TherapyProgramDTO(
+                    programIdTxt.getText(),
+                    programNameTxt.getText(),
+                    durationTxt.getText(),
+                    fee,
+                    descriptionTxt.getText()
+            );
+
+            if (therapyProgramBO.updateTherapyProgram(programDto)) {
+                showAlert("Success", "Program updated successfully", Alert.AlertType.INFORMATION);
+                refreshPage();
+            } else {
+                showAlert("Error", "Failed to update program", Alert.AlertType.ERROR);
+            }
+        } catch (NumberFormatException e) {
+            showAlert("Input Error", "Please enter a valid fee", Alert.AlertType.WARNING);
+        }
+    }
+
+    private void showAlert(String title, String message, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
 }

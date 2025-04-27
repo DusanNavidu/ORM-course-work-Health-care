@@ -1,27 +1,25 @@
 package lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.entity.Patient;
+import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.entity.TherapyProgram;
+import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.entity.TherapySession;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+@Getter
+@Setter
 @NoArgsConstructor
-public class PaymentDTO {
-    private int paymentId;
-    private Date date;
-    private Date time; // keep this as Date to match the entity
-    private int programId;
-    private int patientId;
-    private String amount;
+@AllArgsConstructor
+@ToString
 
-    public PaymentDTO(Date date, Date time, int programId, int patientId, String amount) {
-        this.date = date;
-        this.time = time;
-        this.programId = programId;
-        this.patientId = patientId;
-        this.amount = amount;
-    }
+public class PaymentDTO {
+    private String paymentId;
+    private Patient patient;
+    private TherapyProgram therapyProgram;
+    private TherapySession therapySession;
+    private BigDecimal amount;
+    private LocalDate paymentDate;
 }
