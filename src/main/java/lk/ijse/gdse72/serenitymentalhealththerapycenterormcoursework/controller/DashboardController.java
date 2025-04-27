@@ -76,13 +76,13 @@ public class DashboardController {
     @FXML
     void btnPatientsOnAction(ActionEvent event) {
         highlightButton(btnPatients);
-        navigateTo("/view/Patients-form.fxml");
+        navigateTo("/view/patients-page.fxml");
     }
 
     @FXML
     void btnPaymentOnAction(ActionEvent event) {
         highlightButton(btnPayment);
-        navigateTo("/view/Payment-form.fxml");
+        navigateTo("/view/payments-page.fxml");
     }
 
     @FXML
@@ -94,25 +94,25 @@ public class DashboardController {
     @FXML
     void btnTherapistsOnAction(ActionEvent event) {
         highlightButton(btnTherapists);
-        navigateTo("/view/Therapists-form.fxml");
+        navigateTo("/view/therapists-page.fxml");
     }
 
     @FXML
     void btnTherapyProgramsOnAction(ActionEvent event) {
         highlightButton(btnTherapyPrograms);
-        navigateTo("/view/TherapyPrograms-form.fxml");
+        navigateTo("/view/therapy-programs-page.fxml");
     }
 
     @FXML
     void btnTherapySessionsOnAction(ActionEvent event) {
         highlightButton(btnTherapySessions);
-
+        navigateTo("/view/therapy-sessions-page.fxml");
     }
 
     @FXML
     void btnUsersOnAction(ActionEvent event) {
         highlightButton(btnUsers);
-        navigateTo("/view/User-form.fxml");
+//        navigateTo("/view/User-form.fxml");
     }
 
     @FXML

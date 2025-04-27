@@ -1,209 +1,151 @@
 package lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dao.custom.impl;
 
-
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.config.FactoryConfiguration;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dao.custom.UserDAO;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class UserDAOImpl implements UserDAO {
-    private final FactoryConfiguration factoryConfiguration = FactoryConfiguration.getInstance();
-
     @Override
     public boolean save(User entity) {
-        Session session = factoryConfiguration.getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
+
         try {
             session.persist(entity);
             transaction.commit();
             return true;
-        }catch (Exception e) {
+        } catch (Exception e) {
             transaction.rollback();
+            e.printStackTrace();
             return false;
-        }finally {
-            if (session != null) {
-                session.close();
-            }
+        } finally {
+            session.close();
         }
     }
 
     @Override
     public boolean update(User entity) {
-        Session session = factoryConfiguration.getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
+
         try {
             session.merge(entity);
             transaction.commit();
             return true;
         } catch (Exception e) {
             transaction.rollback();
+            e.printStackTrace();
             return false;
         } finally {
-            if (session != null) {
-                session.close();
-            }
+            session.close();
         }
     }
 
     @Override
-    public boolean delete(String pk) {
-        Session session = factoryConfiguration.getSession();
+    public boolean delete(String id) {
+        Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         try {
-            User user = session.find(User.class, pk);
-            if (user!= null) {
-                session.remove(user);
-                transaction.commit();
-                return true;
-            }
-            return false;
-        }catch (Exception e) {
+            session.remove(id);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
             transaction.rollback();
+            e.printStackTrace();
             return false;
-        }finally {
-            if (session != null) {
-                session.close();
-            }
+        } finally {
+            session.close();
         }
     }
 
     @Override
-    public List<User> getAll() {
-        Session session = factoryConfiguration.getSession();
-        List<User> users = session.createQuery("FROM User", User.class).list();
-        session.close();
-        return users;
+    public ArrayList<User> getAll() {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        ArrayList<User> users = new ArrayList<>();
 
+        try {
+            List<User> patientList = session.createQuery("FROM User ", User.class).list();
+            users.addAll(patientList);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return users;
+    }
+
+    @Override
+    public Optional<User> findByName(String pk) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<String> getLastPK() {
+        return Optional.empty();
     }
 
     @Override
     public User findByID(String pk) {
-        Session session = factoryConfiguration.getSession();
-        try {
-            return session.get(User.class, pk);
-        } finally {
-            session.close();
-        }
-    }
-
-
-    @Override
-    public Optional<User> findByName(String username) {
-        Session session = factoryConfiguration.getSession();
-        List<User> users = null;
-
-        try {
-            users = session.createQuery("FROM User WHERE username = :username", User.class)
-                    .setParameter("username", username)
-                    .getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        return users.isEmpty() ? Optional.empty() : Optional.of(users.get(0));
-    }
-
-
-    @Override
-    public Optional<String> getLastPK() {
-        Session session = factoryConfiguration.getSession();
-        String lastPk = session.createQuery("SELECT u.user_id FROM User u ORDER BY u.user_id DESC", String.class)
-                .setMaxResults(1)
-                .uniqueResult();
-        session.close();
-
-        return Optional.ofNullable(lastPk);
+        return null;
     }
 
     @Override
     public String validateUser(String username, String password) {
-        Session session = factoryConfiguration.getSession();
-        Object[] result = null;
-
-        try {
-            result = session.createQuery(
-                            "SELECT u.password, u.role FROM User u WHERE u.username = :username", Object[].class)
-                    .setParameter("username", username)
-                    .uniqueResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        if (result == null) {
-            System.out.println("Debug: No user found with username: " + username);
-            return null;
-        }
-
-        String databasePassword = (String) result[0];
-        String role = (String) result[1];
-
-        if (databasePassword != null && databasePassword.equals(password)) {
-            System.out.println("Debug: Authentication successful for role: " + role);
-            return role;
-        } else {
-            System.out.println("Debug: Password does not match for user: " + username);
-            return null;
-        }
+        return "";
     }
-
 
     @Override
     public Optional<User> findByUserId(String userId) {
-        Session session = factoryConfiguration.getSession();
-        List<User> users = null;
-
-        try {
-            users = session.createQuery("FROM User WHERE user_id = :userId", User.class)
-                    .setParameter("userId", userId)
-                    .getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        return users.isEmpty() ? Optional.empty() : Optional.of(users.get(0));
+        return Optional.empty();
     }
-
 
     @Override
     public boolean updateUsernameAndPassword(String userId, String newUsername, String newPassword) {
-        Session session = factoryConfiguration.getSession();
-        Transaction transaction = session.beginTransaction();
-
-        try {
-            User user = session.find(User.class, userId);
-
-            if (user != null) {
-                // Update only the username and password
-                user.setUsername(newUsername);
-                user.setPassword(newPassword);  // Assuming password is already hashed when being passed here
-
-                session.update(user);  // Update the user with new values
-                transaction.commit();
-                return true;
-            } else {
-                return false;
-            }
-
-        } catch (Exception e) {
-            transaction.rollback();
-            return false;
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
+        return false;
     }
 
+    @Override
+    public String generateNewID() throws Exception {
+        return "";
+    }
 
+    @Override
+    public User findById(String id) {
+        return null;
+    }
+
+    @Override
+    public boolean ValidUser(String username, String password) throws SQLException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            String hql = "FROM User u WHERE u.username = :username AND u.password = :password";
+            Query<User> query = session.createQuery(hql, User.class);
+            query.setParameter("username", username);
+            query.setParameter("password", Integer.parseInt(password)); // if password is int in DB
+
+            User user = query.uniqueResult();
+
+            transaction.commit();
+            return user != null;
+        } catch (Exception e) {
+            transaction.rollback();
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
+    }
 
 }

@@ -25,7 +25,6 @@ import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dto.Therapi
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dto.TherapyProgramDTO;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.tm.TherapistProgramTM;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.tm.TherapistTM;
-import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.util.NavigationUtil;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -130,7 +129,6 @@ public class TherapistsController implements Initializable {
     @FXML
     private TableView<TherapistTM> therapistsTable;
 
-    NavigationUtil navigate = new NavigationUtil();
 
     private final TherapistBO therapistBO = new TherapistBOImpl();
     TherapistProgramBO therapistProgramBO = new TherapistProgramBOImpl();
@@ -382,7 +380,7 @@ public class TherapistsController implements Initializable {
 
     @FXML
     void loadTherapistAvailabilityPage(ActionEvent event) {
-        navigate.navigatePopup("/view/therapist-availability-page.fxml", "Manage Therapist Availability");
+
     }
 
     @FXML

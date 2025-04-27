@@ -1,33 +1,24 @@
 package lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 
 @Entity
-@Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
-@Table(name = "users")
-public class User implements SuperEntity {
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class User {
     @Id
-    private String user_id;
-
-    @Column(unique = true, nullable = false)
-    private String username;
-
-    @Column(nullable = false)
-    private String password;
-
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int userId;
+    private String userName;
     private String email;
-
-    @Column(nullable = false)
-    private String role; // "Admin" or "Receptionist"
-
+    private int phone;
+    private int password;
 }

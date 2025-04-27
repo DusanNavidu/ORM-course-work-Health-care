@@ -43,7 +43,7 @@ public class BOFactory {
             case THERAPY_SESSION:
                 return new TherapySessionBOImpl();
             case USER:
-                return new UserBOImpl();
+                return new lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.bo.custom.boImpl.UserBOImpl();
             default:
                 return null;
         }

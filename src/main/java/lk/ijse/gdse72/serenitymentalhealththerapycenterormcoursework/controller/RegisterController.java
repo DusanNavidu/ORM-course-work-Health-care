@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.bo.BOFactory;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.bo.custom.UserBO;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dto.UserDTO;
+import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.tm.UserTM;
 
 import java.io.IOException;
 import java.net.URL;
@@ -118,6 +119,6 @@ public class RegisterController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOType.USER);
+        userBO = (UserBO) BOFactory.getInstance().getBO(BOFactory.BOType.USER);
     }
 }

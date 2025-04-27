@@ -1,5 +1,6 @@
 package lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,7 +15,6 @@ import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.bo.custom.i
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.dto.TherapyProgramDTO;
 import lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.tm.TherapyProgramTM;
 
-
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,25 +23,40 @@ import java.util.ResourceBundle;
 public class TherapyProgramsController implements Initializable {
 
     @FXML
-    private TableColumn<TherapyProgramTM, String> programDurationCol;
+    private AnchorPane bodyPane;
 
     @FXML
-    private TableColumn<TherapyProgramTM, String> programNameCol;
+    private JFXButton btnDelete;
 
     @FXML
-    private Button deleteButton;
+    private JFXButton btnEmail;
 
     @FXML
-    private TextField durationTxt;
+    private JFXButton btnResert;
+
+    @FXML
+    private JFXButton btnSave;
+
+    @FXML
+    private JFXButton btnSearch;
+
+    @FXML
+    private JFXButton btnUpdate;
 
     @FXML
     private TextArea descriptionTxt;
 
     @FXML
+    private TextField durationTxt;
+
+    @FXML
     private TextField feeTxt;
 
     @FXML
-    private TableColumn<TherapyProgramTM, String> patientEmailCol;
+    private TableColumn<TherapyProgramTM, String> programDescriptionCol;
+
+    @FXML
+    private TableColumn<TherapyProgramTM, String> programDurationCol;
 
     @FXML
     private TableColumn<TherapyProgramTM, BigDecimal> programFeeCol;
@@ -53,16 +68,10 @@ public class TherapyProgramsController implements Initializable {
     private TextField programIdTxt;
 
     @FXML
+    private TableColumn<TherapyProgramTM, String> programNameCol;
+
+    @FXML
     private TextField programNameTxt;
-
-    @FXML
-    private TableColumn<TherapyProgramTM, String> programDescriptionCol;
-
-    @FXML
-    private Button saveButton;
-
-    @FXML
-    private Button searchButton;
 
     @FXML
     private TextField searchTxt;
@@ -70,15 +79,7 @@ public class TherapyProgramsController implements Initializable {
     @FXML
     private TableView<TherapyProgramTM> therapyProgramsTable;
 
-    @FXML
-    private Button updateButton;
-
-    @FXML
-    private AnchorPane bodyPane;
-
     private final TherapyProgramBO therapyProgramBO = new TherapyProgramBOImpl();
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -128,18 +129,29 @@ public class TherapyProgramsController implements Initializable {
     }
 
     @FXML
-    void delete(ActionEvent event) {
+    void btnDeleteOnAcion(ActionEvent event) {
         String programId = programIdTxt.getText();
         if (therapyProgramBO.deleteTherapyProgram(programId)) {
-            showAlert("Success", "Program deleted successfully", Alert.AlertType.INFORMATION);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Program deleted successfully!");
             refreshPage();
         } else {
-            showAlert("Error", "Failed to delete program", Alert.AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to delete program!");
+            alert.show();
         }
     }
 
     @FXML
-    void save(ActionEvent event) {
+    void btnEmailOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnResertOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnSaveOnAction(ActionEvent event) {
         try {
             BigDecimal fee = new BigDecimal(feeTxt.getText().trim());
             TherapyProgramDTO programDto = new TherapyProgramDTO(
@@ -151,22 +163,24 @@ public class TherapyProgramsController implements Initializable {
             );
 
             if (therapyProgramBO.saveTherapyProgram(programDto)) {
-                showAlert("Success", "Program saved successfully", Alert.AlertType.INFORMATION);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Program saved successfully!");
                 refreshPage();
             } else {
-                showAlert("Error", "Failed to save program", Alert.AlertType.ERROR);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to save program!");
+                alert.show();
             }
         } catch (NumberFormatException e) {
-            showAlert("Input Error", "Please enter a valid fee", Alert.AlertType.WARNING);
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter a valid fee!");
+            alert.show();
         }
     }
 
     @FXML
-    void search(ActionEvent event) {
+    void btnSearchOnAction(ActionEvent event) {
         String name = searchTxt.getText().trim();
 
         if (name.isEmpty()) {
-            showAlert("Input Error", "Please enter a program name to search", Alert.AlertType.WARNING);
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter a program name to search");
             refreshPage();
             return;
         }
@@ -188,8 +202,32 @@ public class TherapyProgramsController implements Initializable {
 
             therapyProgramsTable.setItems(programTMS);
         } else {
-            showAlert("Not Found", "No program found with that name", Alert.AlertType.WARNING);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "No programs found with the given name");
             therapyProgramsTable.setItems(FXCollections.emptyObservableList());
+        }
+    }
+
+    @FXML
+    void btnUpdateOnAction(ActionEvent event) {
+        try {
+            BigDecimal fee = new BigDecimal(feeTxt.getText().trim());
+            TherapyProgramDTO programDto = new TherapyProgramDTO(
+                    programIdTxt.getText(),
+                    programNameTxt.getText(),
+                    durationTxt.getText(),
+                    fee,
+                    descriptionTxt.getText()
+            );
+
+            if (therapyProgramBO.updateTherapyProgram(programDto)) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Program updated successfully!");
+                refreshPage();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to update program!");
+            }
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter a valid fee!");
+            alert.show();
         }
     }
 
@@ -204,37 +242,4 @@ public class TherapyProgramsController implements Initializable {
             descriptionTxt.setText(selectedProgram.getDescription());
         }
     }
-
-    @FXML
-    void update(ActionEvent event) {
-        try {
-            BigDecimal fee = new BigDecimal(feeTxt.getText().trim());
-            TherapyProgramDTO programDto = new TherapyProgramDTO(
-                    programIdTxt.getText(),
-                    programNameTxt.getText(),
-                    durationTxt.getText(),
-                    fee,
-                    descriptionTxt.getText()
-            );
-
-            if (therapyProgramBO.updateTherapyProgram(programDto)) {
-                showAlert("Success", "Program updated successfully", Alert.AlertType.INFORMATION);
-                refreshPage();
-            } else {
-                showAlert("Error", "Failed to update program", Alert.AlertType.ERROR);
-            }
-        } catch (NumberFormatException e) {
-            showAlert("Input Error", "Please enter a valid fee", Alert.AlertType.WARNING);
-        }
-    }
-
-    private void showAlert(String title, String message, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-
 }

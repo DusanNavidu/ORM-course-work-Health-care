@@ -1,16 +1,17 @@
 package lk.ijse.gdse72.serenitymentalhealththerapycenterormcoursework.tm;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
-@ToString
+@NoArgsConstructor
+
 public class UserTM {
-    private String userId;
-    private String username;
-    private String password;
+    private int userId;
+    private String userName;
     private String email;
-    private String role;
+    private int phone;
+    private int password;
 }

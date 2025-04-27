@@ -30,7 +30,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-public class TherapySessionsController implements Initializable {
+public class TherapyAppointmentController implements Initializable {
 
     @FXML
     private AnchorPane bodyPane;
